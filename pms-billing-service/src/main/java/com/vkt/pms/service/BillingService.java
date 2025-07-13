@@ -2,7 +2,7 @@ package com.vkt.pms.service;
 
 import com.vkt.pms.request.BillingRequest;
 import com.vkt.pms.response.BillingResponse;
-import com.vkt.pms.request.TransactionRequest;
+import com.vkt.pms.request.BillingTransactionRequest;
 import com.vkt.pms.entity.BillingAccount;
 import com.vkt.pms.entity.BillingTransaction;
 import com.vkt.pms.exception.BillingAccountNotFoundException;
@@ -41,13 +41,13 @@ public class BillingService {
                 });
 
         // Create BillingTransaction for Registration Fee
-        TransactionRequest transactionRequest = request.getTransactionRequests().get(0);
+        BillingTransactionRequest billingTransactionRequest = request.getBillingTransactionRequests().get(0);
         BillingTransaction transaction = BillingTransaction.builder()
                 .billingAccount(account)
-                .transactionType(transactionRequest.getTransactionType())
-                .amount(transactionRequest.getAmount().negate()) // Deduct fee (e.g., -100)
+                .transactionType(billingTransactionRequest.getTransactionType())
+                .amount(billingTransactionRequest.getAmount().negate()) // Deduct fee (e.g., -100)
                 .createdTimestamp(LocalDateTime.now())
-                .remarks(transactionRequest.getRemarks())
+                .remarks(billingTransactionRequest.getRemarks())
                 .build();
 
         BillingTransaction saveTransaction = billingTransactionRepository.save(transaction);
@@ -78,7 +78,7 @@ public class BillingService {
         // Create Transaction for newly added bill's
         BigDecimal totalAmt= BigDecimal.ZERO;
         List<BillingTransaction> transactionList = new ArrayList<>();
-        for(TransactionRequest t : request.getTransactionRequests()){
+        for(BillingTransactionRequest t : request.getBillingTransactionRequests()){
             totalAmt = totalAmt.add(t.getAmount());
             BillingTransaction transaction = BillingTransaction.builder()
                     .billingAccount(account)
@@ -114,18 +114,18 @@ public class BillingService {
                 .orElseThrow(() -> new BillingAccountNotFoundException("Billing Account not found for Patient :"+request.getPatientId()));
 
         // Create BillingTransaction for Payment
-        TransactionRequest transactionRequest = request.getTransactionRequests().get(0);
+        BillingTransactionRequest billingTransactionRequest = request.getBillingTransactionRequests().get(0);
         BillingTransaction transaction = BillingTransaction.builder()
                 .billingAccount(account)
-                .transactionType(transactionRequest.getTransactionType())
-                .amount(transactionRequest.getAmount())
+                .transactionType(billingTransactionRequest.getTransactionType())
+                .amount(billingTransactionRequest.getAmount())
                 .createdTimestamp(LocalDateTime.now())
-                .remarks(transactionRequest.getRemarks())
+                .remarks(billingTransactionRequest.getRemarks())
                 .build();
         BillingTransaction savedTransaction = billingTransactionRepository.save(transaction);
 
         // Update Account Balance
-        account.setAccountBalance(account.getAccountBalance().add(transactionRequest.getAmount()));
+        account.setAccountBalance(account.getAccountBalance().add(billingTransactionRequest.getAmount()));
         account.setUpdateTimeStamp(LocalDateTime.now());
         BillingAccount savedBA = billingAccountRepository.save(account);
 

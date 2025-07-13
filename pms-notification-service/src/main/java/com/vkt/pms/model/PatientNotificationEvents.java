@@ -1,8 +1,7 @@
-package com.vkt.pms.events;
+package com.vkt.pms.model;
 
-import lombok.*;
+import lombok.Data;
 
-@Builder
 @Data
 public class PatientNotificationEvents {
     private Long patientId;

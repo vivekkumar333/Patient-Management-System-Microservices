@@ -11,6 +11,8 @@ import com.vkt.pms.repository.PatientRepository;
 import com.vkt.pms.response.BillingResponseDto;
 import com.vkt.pms.response.PatientResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;

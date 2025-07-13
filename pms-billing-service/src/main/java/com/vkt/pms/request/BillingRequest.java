@@ -20,5 +20,5 @@ public class BillingRequest {
 
     @Valid
     @NotEmpty
-    List<TransactionRequest> transactionRequests;
+    List<BillingTransactionRequest> billingTransactionRequests;
 }

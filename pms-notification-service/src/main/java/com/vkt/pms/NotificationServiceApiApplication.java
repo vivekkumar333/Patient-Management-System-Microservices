@@ -3,13 +3,11 @@ package com.vkt.pms;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.*;
+
 @SpringBootApplication
-public class PatientServiceApiApplication {
-
+public class NotificationServiceApiApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(PatientServiceApiApplication.class, args);
+		SpringApplication.run(NotificationServiceApiApplication.class, args);
 	}
-
-
-
 }

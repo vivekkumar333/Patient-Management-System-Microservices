@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Data
 @Builder
-public class TransactionRequest {
+public class BillingTransactionRequest {
     @NotNull(message = "Transaction type is required")
     private String transactionType;
 

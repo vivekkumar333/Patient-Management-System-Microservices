@@ -1,0 +1,11 @@
+# application name and Port
+spring:
+  application:
+    name: cps-auth-service
+server:
+  port: 4005
+
+
+
+
+

@@ -16,7 +16,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/patient")
+@RequestMapping("/patient")
 @Tag(name = "Patient", description = "Operations related to Patient")
 public class PatientController {
     private final PatientService patientService;

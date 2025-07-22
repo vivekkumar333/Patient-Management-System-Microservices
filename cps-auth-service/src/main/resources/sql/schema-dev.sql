@@ -1,3 +1,6 @@
+-- Create schema if not exists
+CREATE SCHEMA IF NOT EXISTS auth_schema;
+
 -- Create User table if not exists
 CREATE TABLE IF NOT EXISTS auth_schema.user (
     uid BIGSERIAL PRIMARY KEY,

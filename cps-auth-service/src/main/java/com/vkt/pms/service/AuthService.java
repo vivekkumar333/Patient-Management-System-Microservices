@@ -18,8 +18,11 @@ public class AuthService {
     public Optional<String> authenticate(LoginRequest req) {
         Optional<String> token = userService.getUserByEmail(req.getEmail())
                 .filter(u-> passwordEncoder.matches(req.getPassword(),u.getPassword()))
-                .map(u-> jwtUtil.generateToken(u));
-
+                .map(jwtUtil::generateToken);
         return token;
+    }
+
+    public boolean validateToken(String token){
+        return jwtUtil.isTokenValid(token);
     }
 }

@@ -11,4 +11,5 @@ public class UserRegistrationRequest {
     private String name;
     private String address;
     private LocalDate dateOfBirth;
+    private String role;
 }

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vkt.pms</groupId>
-	<artifactId>cps-auth-service</artifactId>
+	<artifactId>pms-auth-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cps-auth-service</name>
+	<name>pms-auth-service</name>
 	<description>This is the auth-service to Handle patient &amp; system admin authentication</description>
 	<properties>
 		<java.version>17</java.version>

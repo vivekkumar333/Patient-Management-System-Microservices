@@ -1,16 +1,21 @@
 package com.vkt.pms.utility;
 
 import com.vkt.pms.entity.User;
-import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
+import javax.crypto.SecretKey;
 import java.security.Key;
-import java.util.*;
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JwtUtil {
@@ -29,35 +34,41 @@ public class JwtUtil {
         claims.put("role", user.getRole().name());
 
         return Jwts.builder()
-                .setSubject(user.getEmail())
                 .setClaims(claims)
+                .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
                 .signWith(this.secretKey)
                 .compact();
     }
 
-    public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(this.secretKey)
-                .parseClaimsJws(token)
-                .getBody();
-    }
+//    public Claims extractClaims(String token) {
+//        return Jwts.parser()
+//                .setSigningKey(this.secretKey)
+//                .parseClaimsJws(token)
+//                .getBody();
+//    }
 
-    public boolean isTokenValid(String token) {
+    public void validateToken(String token) {
         try {
-            Claims claims = extractClaims(token);
-            return !claims.getExpiration().before(new Date());
-        } catch (Exception e) {
-            return false;
+           Jwts.parserBuilder()
+                   .setSigningKey(this.secretKey)
+                   .build()
+                   .isSigned(token);
+        } catch (SecurityException | MalformedJwtException | SignatureException ex) {
+            throw new JwtException("Invalid JWT Signature");
+        }catch (ExpiredJwtException ex){
+            throw new JwtException("JWT Token has been expired");
+        }catch (JwtException ex){
+            throw new JwtException("Invalid JWT Token");
         }
     }
 
-    public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
-    }
-
-    public String extractRole(String token) {
-        return (String) extractClaims(token).get("role");
-    }
+//    public String extractUsername(String token) {
+//        return extractClaims(token).getSubject();
+//    }
+//
+//    public String extractRole(String token) {
+//        return (String) extractClaims(token).get("role");
+//    }
 }

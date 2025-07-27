@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthService authService;
@@ -39,7 +39,7 @@ public class AuthenticationController {
         if(authHeader==null || !authHeader.startsWith("Bearer ")){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        return authService.validateToken(authHeader.substring(7))
+        return authService.isValidToken(authHeader.substring(7))
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

@@ -10,6 +10,6 @@ RUN ./mvnw clean package -DskipTests
 # -------- Stage 2: Run the application --------
 FROM eclipse-temurin:17-jdk-alpine AS runner
 WORKDIR /app
-COPY --from=builder /app/target/*.jar billing-service-1.0.0.jar
-EXPOSE 4002
-ENTRYPOINT ["java", "-jar", "billing-service-1.0.0.jar"]
+COPY --from=builder /app/target/*.jar notification-service-1.0.0.jar
+EXPOSE 4003
+ENTRYPOINT ["java", "-jar", "notification-service-1.0.0.jar"]

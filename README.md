@@ -19,7 +19,9 @@ Sending notification to the patient registration, bill payment etc.
 
 
 ## Architecture
+## Architecture
 
+```text
                                 +--------------------+
                                 |    Angular UI      |
                                 |   (pms-ui module)  |
@@ -69,8 +71,7 @@ Sending notification to the patient registration, bill payment etc.
                     |-----------------------------------------------|
                     |  auth-db, patient-database, billing-database  |
                     +-----------------------------------------------+
-
-
+```
 
 
 

@@ -20,8 +20,8 @@ public class CustomKeyGenerator {
     }
 
     public static void main(String[] args) {
-//        base64EncodedStringGenerator();    // Generate secret key
+        base64EncodedStringGenerator();    // Generate secret key
 
-        BCryptHashStringGenerator();       // Generate BCrypt Hashing string
+//        BCryptHashStringGenerator();       // Generate BCrypt Hashing string
     }
 }

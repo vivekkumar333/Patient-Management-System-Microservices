@@ -11,8 +11,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/project_databases
-    username: vkt_create_db
-    password: 0126CA
+    username:
+    password: 
 
 # === hikariCP configuration for Connection Pooling ===
     hikari:
@@ -44,5 +44,5 @@ spring:
     bootstrap-servers: localhost:9092
 
 jwt:
-  secret: H/hrbF4elYoE2hqeUP8YiKagz4eaHN956UW/1p+MOmDfvD+ofX0qD5pWRSjNkYgh1v49OC0MVmPce6AD8tqwpQ==
+  secret: k4QvFKK
   expirationMillis: 86400000

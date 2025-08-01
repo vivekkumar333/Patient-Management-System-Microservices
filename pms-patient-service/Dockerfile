@@ -24,10 +24,10 @@ FROM eclipse-temurin:17-jdk-alpine AS runner
 WORKDIR /app
 
 # Copy the jar from the builder image
-COPY --from=builder /app/target/*.jar patient-service.jar
+COPY --from=builder /app/target/*.jar patient-service-1.0.0.jar
 
 # Expose port for Spring Boot app
 EXPOSE 4001
 
 # Run the app
-ENTRYPOINT ["java", "-jar", "patient-service.jar"]
+ENTRYPOINT ["java", "-jar", "patient-service-1.0.0.jar"]

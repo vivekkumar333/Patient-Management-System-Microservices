@@ -56,6 +56,8 @@ Sending notification to the patient registration, bill payment etc.
         |          +---------------------------+        |                       |
         +--------->| auth-patient-registration |        |                       |
                    |          topic            |        |                       |
+				   |						   |		|						|
+				   |     If Role:PATIENT	   |		|						|
                    +---------------------------+        |                       |
                                                       +------------------+      |
                                                       | billing-topic    |<-----+
@@ -67,12 +69,22 @@ Sending notification to the patient registration, bill payment etc.
 
                     +-----------------------------------------------+
                     |              	PostgreSQL DB               	|
-                    | 	(Separate DBs/Schemas for each service)  	|
-                    |-----------------------------------------------|
+                    |(Can be separate DBs/Schemas for each service) |
+                    | 		But in local docker environment 		|
+					|	Created pms_database for below schema		|
+					|-----------------------------------------------|
                     |  auth-db, patient-database, billing-database  |
                     +-----------------------------------------------+
 ```
+## Docker-Containerization Port configuration for Services
+Postgres db: 5000 	- Independent Container
+Kafka: 9092			- Independent Container
 
+patient-service: 4001
+billing-service: 4002
+notification-service: 4003
+auth-service: 4004 
+gateway-service: 4005
 
 
 ## Current Microservices

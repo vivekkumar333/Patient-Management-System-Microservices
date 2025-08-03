@@ -10,7 +10,7 @@ spring:
 # Postgres-database configuration
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/project_databases
+    url: jdbc:postgresql://postgres-database:5432/pms_database
     username:
     password:
 
@@ -41,7 +41,7 @@ spring:
 
 #Kafka broker address
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: kafka:9092
 
 jwt:
   secret: k4QvFKKCwW2sTmSGtWi+0pFjWTgToJ+C7j9HDm03PCoPNiIL8rtzBBUiAHGJa2Oy9xpFstcIeNcrMYWTU8309g==
